@@ -2,6 +2,7 @@ package com.db.dataplatform.techtest.server.api.controller;
 
 import com.db.dataplatform.techtest.server.api.model.DataEnvelope;
 import com.db.dataplatform.techtest.server.component.Server;
+import com.db.dataplatform.techtest.server.utility.DigestUtility;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -29,6 +30,7 @@ public class ServerController {
     public ResponseEntity<Boolean> pushData(@Valid @RequestBody DataEnvelope dataEnvelope) throws IOException, NoSuchAlgorithmException {
 
         log.info("Data envelope received: {}", dataEnvelope.getDataHeader().getName());
+        DigestUtility.validateChecksumForDataBody(dataEnvelope.getDataBody(),dataEnvelope.getDataHeader().getCheckSum());
         boolean checksumPass = server.saveDataEnvelope(dataEnvelope);
 
         log.info("Data envelope persisted. Attribute name: {}", dataEnvelope.getDataHeader().getName());

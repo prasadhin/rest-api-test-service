@@ -14,10 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DataEnvelopeTests {
+    public static final String CHECKSUM = "CECFD3953783DF706878AAEC2C22AA70";
 
     @Test
     public void assignDataHeaderFieldsShouldWorkAsExpected() {
-        DataHeader dataHeader = new DataHeader(TEST_NAME, BlockTypeEnum.BLOCKTYPEA);
+        DataHeader dataHeader = new DataHeader(TEST_NAME, BlockTypeEnum.BLOCKTYPEA,CHECKSUM);
         DataBody dataBody = new DataBody(DUMMY_DATA);
 
         DataEnvelope dataEnvelope = new DataEnvelope(dataHeader, dataBody);

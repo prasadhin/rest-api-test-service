@@ -11,10 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DataHeaderTests {
-
+    public static final String CHECKSUM = "CECFD3953783DF706878AAEC2C22AA70";
     @Test
     public void assignDataHeaderFieldsShouldWorkAsExpected() {
-        DataHeader dataHeader = new DataHeader(TEST_NAME, BlockTypeEnum.BLOCKTYPEA);
+        DataHeader dataHeader = new DataHeader(TEST_NAME, BlockTypeEnum.BLOCKTYPEA,CHECKSUM);
 
         assertThat(dataHeader.getName()).isEqualTo(TEST_NAME);
         assertThat(dataHeader.getBlockType()).isEqualTo(BlockTypeEnum.BLOCKTYPEA);

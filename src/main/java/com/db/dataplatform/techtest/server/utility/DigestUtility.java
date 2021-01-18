@@ -4,7 +4,6 @@ import com.db.dataplatform.techtest.server.api.model.DataBody;
 import com.db.dataplatform.techtest.server.exception.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
-import javax.validation.ConstraintViolationException;
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
