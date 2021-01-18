@@ -23,7 +23,7 @@ import static com.db.dataplatform.techtest.Constant.DUMMY_DATA;
 public class TechTestApplication {
 
 	public static final String HEADER_NAME = "TSLA-USDGBP-10Y";
-	public static final String MD5_CHECKSUM = "cecfd3953783df706878aaec2c22aa70";
+	public static final String MD5_CHECKSUM = "CECFD3953783DF706878AAEC2C22AA70";
 
 	@Autowired
 	private Client client;
@@ -55,7 +55,7 @@ public class TechTestApplication {
 
 		DataBody dataBody = new DataBody(DUMMY_DATA);
 
-		DataHeader dataHeader = new DataHeader(HEADER_NAME, BlockTypeEnum.BLOCKTYPEA);
+		DataHeader dataHeader = new DataHeader(HEADER_NAME, BlockTypeEnum.BLOCKTYPEA, MD5_CHECKSUM);
 
 		DataEnvelope dataEnvelope = new DataEnvelope(dataHeader, dataBody);
 

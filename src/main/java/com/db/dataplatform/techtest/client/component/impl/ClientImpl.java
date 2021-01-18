@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,7 +40,10 @@ public class ClientImpl implements Client {
     @Override
     public List<DataEnvelope> getData(String blockType) {
         log.info("Query for data with header block type {}", blockType);
-        return null;
+        ResponseEntity<DataEnvelope[]> responseEntity = restTemplate.getForEntity(
+                URI_GETDATA.expand(blockType),
+                DataEnvelope[].class);
+        return Arrays.asList(responseEntity.getBody());
     }
 
     @Override
