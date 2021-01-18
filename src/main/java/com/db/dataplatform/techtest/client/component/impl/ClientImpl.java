@@ -4,7 +4,11 @@ import com.db.dataplatform.techtest.client.api.model.DataEnvelope;
 import com.db.dataplatform.techtest.client.component.Client;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
 
 import java.util.List;
@@ -22,9 +26,14 @@ public class ClientImpl implements Client {
     public static final UriTemplate URI_GETDATA = new UriTemplate("http://localhost:8090/dataserver/data/{blockType}");
     public static final UriTemplate URI_PATCHDATA = new UriTemplate("http://localhost:8090/dataserver/update/{name}/{newBlockType}");
 
+    @Autowired
+    RestTemplate restTemplate;
+
     @Override
     public void pushData(DataEnvelope dataEnvelope) {
         log.info("Pushing data {} to {}", dataEnvelope.getDataHeader().getName(), URI_PUSHDATA);
+        HttpEntity<DataEnvelope> request = new HttpEntity<>(dataEnvelope);
+        ResponseEntity<Boolean> response = restTemplate.postForEntity(URI_PUSHDATA,request,Boolean.class);
     }
 
     @Override
