@@ -49,6 +49,11 @@ public class ClientImpl implements Client {
     @Override
     public boolean updateData(String blockName, String newBlockType) {
         log.info("Updating blocktype to {} for block with name {}", newBlockType, blockName);
+        restTemplate.patchForObject(
+                URI_PATCHDATA.expand(blockName,newBlockType),
+                null,
+                Boolean.class
+        );
         return true;
     }
 

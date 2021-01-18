@@ -31,4 +31,16 @@ public class DataBodyServiceImpl implements DataBodyService {
     public Optional<DataBodyEntity> getDataByBlockName(String blockName) {
         return null;
     }
+
+    @Override
+    public boolean patchData(String name, String newBlockType){
+        List<DataBodyEntity> dataBodyEntities = dataStoreRepository.findByDataHeaderEntity_Name(name);
+        dataBodyEntities.forEach(
+                dataBodyEntity -> {
+                    dataBodyEntity.getDataHeaderEntity().setBlocktype(BlockTypeEnum.valueOf(newBlockType));
+                    dataStoreRepository.save(dataBodyEntity);
+                }
+        );
+        return true;
+    };
 }

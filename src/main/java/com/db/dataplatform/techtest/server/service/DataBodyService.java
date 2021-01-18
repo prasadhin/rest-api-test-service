@@ -10,4 +10,5 @@ public interface DataBodyService {
     void saveDataBody(DataBodyEntity dataBody);
     List<DataBodyEntity> getDataByBlockType(BlockTypeEnum blockType);
     Optional<DataBodyEntity> getDataByBlockName(String blockName);
+    boolean patchData(String name, String newBlockType);
 }

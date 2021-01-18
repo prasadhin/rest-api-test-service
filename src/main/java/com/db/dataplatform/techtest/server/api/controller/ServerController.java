@@ -14,6 +14,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -46,6 +48,16 @@ public class ServerController {
 
         List<DataEnvelope> dataEnvelopes = server.getDataByBlockType(blockTypeEnum);
         return new ResponseEntity<>(dataEnvelopes, HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/update/{name}/{newBlockType}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> patchData(
+            @Valid
+            @PathVariable(value = "name") @NotNull @Size(min = 10)  String name,
+            @PathVariable(value = "newBlockType")  String newBlockType
+    ){
+        boolean response = server.patchData(name,newBlockType);
+        return ResponseEntity.ok(response);
     }
 
 }
