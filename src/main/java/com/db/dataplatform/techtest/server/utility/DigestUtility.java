@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 
 @Component
 public class DigestUtility {
-    public static boolean validateChecksumForDataBody(DataBody dataBody, String clientCheckSum) throws NoSuchAlgorithmException {
+    public  boolean validateChecksumForDataBody(DataBody dataBody, String clientCheckSum) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(dataBody.getDataBody().getBytes());
         byte[] digest = md.digest();

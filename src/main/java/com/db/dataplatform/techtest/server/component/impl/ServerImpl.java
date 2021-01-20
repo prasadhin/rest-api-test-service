@@ -70,7 +70,8 @@ public class ServerImpl implements Server {
         log.info("Pushing data {} to {}", dataEnvelope.getDataHeader().getName(), URI_PUSHDATA);
         HttpEntity<DataEnvelope> request = new HttpEntity<>(dataEnvelope);
         // retry to post to data lake based on retry config bean retry attempts.
-        retryTemplate.execute(context -> {
+        retryTemplate.execute(
+                context -> {
             ResponseEntity<Boolean> response = restTemplate.postForEntity(URI_PUSHDATA, request, Boolean.class);
             return null;
         });
@@ -88,6 +89,11 @@ public class ServerImpl implements Server {
                 }).collect(Collectors.toList());
         return dataEnvelopes;
     }
+
+    /*
+     * update method
+     * for a given name, update a block type
+     */
 
     @Override
     public boolean patchData(String name, String newBlockType){

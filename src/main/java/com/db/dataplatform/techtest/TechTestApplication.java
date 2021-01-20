@@ -47,7 +47,6 @@ public class TechTestApplication {
 	}
 
 	private void queryData() {
-
 		List<DataEnvelope> data = client.getData(BlockTypeEnum.BLOCKTYPEA.name());
 	}
 

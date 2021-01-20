@@ -28,12 +28,13 @@ import java.util.List;
 public class ServerController {
 
     private final Server server;
+    private final DigestUtility digestUtility;
 
     @PostMapping(value = "/pushdata", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> pushData(@Valid @RequestBody DataEnvelope dataEnvelope) throws IOException, NoSuchAlgorithmException {
 
         log.info("Data envelope received: {}", dataEnvelope.getDataHeader().getName());
-        DigestUtility.validateChecksumForDataBody(dataEnvelope.getDataBody(),dataEnvelope.getDataHeader().getCheckSum());
+        digestUtility.validateChecksumForDataBody(dataEnvelope.getDataBody(),dataEnvelope.getDataHeader().getCheckSum());
         boolean checksumPass = server.saveDataEnvelope(dataEnvelope);
 
         log.info("Data envelope persisted. Attribute name: {}", dataEnvelope.getDataHeader().getName());
@@ -53,6 +54,7 @@ public class ServerController {
     @PatchMapping(value = "/update/{name}/{newBlockType}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> patchData(
             @Valid
+            // adding simple validations, but it could be imposed on the models or entities
             @PathVariable(value = "name") @NotNull @Size(min = 10)  String name,
             @PathVariable(value = "newBlockType")  String newBlockType
     ){
