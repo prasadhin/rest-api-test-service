@@ -1,5 +1,5 @@
 ### rest-api-test-service
-####Scenario and Features
+#### Scenario and Features
 - This code is a simplified micro service that contains functionality to save blocks of arbitrary bank data to a persistence store. 
 - Data is stored in-memory H2 database.
 - Provision to add, delete and update is the block is exposed using Rest end Points.
