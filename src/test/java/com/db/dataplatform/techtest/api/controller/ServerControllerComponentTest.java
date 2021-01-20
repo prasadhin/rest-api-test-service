@@ -96,7 +96,6 @@ public class ServerControllerComponentTest {
 						value(TestDataHelper.createTestDataEnvelopeList().get(0).getDataHeader().getBlockType().name()))
 				.andReturn();
 		String response = mvcResult.getResponse().getContentAsString();
-		System.out.println(response);
 	}
 
     // API controller update assertion

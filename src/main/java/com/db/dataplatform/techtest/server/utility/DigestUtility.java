@@ -10,6 +10,10 @@ import java.security.NoSuchAlgorithmException;
 
 @Component
 public class DigestUtility {
+    /*
+     * Calculate checksum of the the data body and compare with the checksum available in the header.
+     * For readability of the evaluator made it available as request param, which was derived from the header.
+     */
     public  boolean validateChecksumForDataBody(DataBody dataBody, String clientCheckSum) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(dataBody.getDataBody().getBytes());
