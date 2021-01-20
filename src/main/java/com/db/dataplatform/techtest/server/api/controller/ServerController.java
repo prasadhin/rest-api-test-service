@@ -34,7 +34,7 @@ public class ServerController {
     public ResponseEntity<Boolean> pushData(@Valid @RequestBody DataEnvelope dataEnvelope) throws IOException, NoSuchAlgorithmException {
 
         log.info("Data envelope received: {}", dataEnvelope.getDataHeader().getName());
-        digestUtility.validateChecksumForDataBody(dataEnvelope.getDataBody(),dataEnvelope.getDataHeader().getCheckSum());
+        digestUtility.validateChecksumForDataBody(dataEnvelope);
         boolean checksumPass = server.saveDataEnvelope(dataEnvelope);
 
         log.info("Data envelope persisted. Attribute name: {}", dataEnvelope.getDataHeader().getName());
